@@ -32,7 +32,7 @@ func (p *Product) Validate() error {
 	if p.Name == "" {
 		return ErrNameIsRequired
 	}
-	if p.Price < 0 {
+	if p.Price <= 0 {
 		return ErrInvalidPrice
 	}
 	return nil
