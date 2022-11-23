@@ -3,12 +3,15 @@ package main
 import (
 	"net/http"
 
+	"github.com/go-chi/chi"
+	"github.com/go-chi/chi/middleware"
+
 	"github.com/misael28/GoApi/configs"
 	"github.com/misael28/GoApi/internal/entity"
 	"github.com/misael28/GoApi/internal/infra/database"
+	"github.com/misael28/GoApi/internal/infra/webserver/handlers"
 	"gorm.io/driver/sqlite"
 	"gorm.io/gorm"
-	"github.com/misael28/GoApi/internal/infra/webserver/handlers"
 )
 
 func main() {
@@ -26,6 +29,9 @@ func main() {
 
 	productHandler := handlers.NewProductHandler(productDB)
 
-	http.HandleFunc("/products", productHandler.CreateProdcut)
-	http.ListenAndServe(":8000", nil)
+	r:= chi.NewRouter()
+	r.Use(middleware.Logger)
+	r.Post("/products", productHandler.CreateProdcut)
+
+	http.ListenAndServe(":8000", r)
 }
