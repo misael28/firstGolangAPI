@@ -5,3 +5,17 @@ Content-Type: application/json
     "name":"My Product",
     "price": 100
 }
+
+###
+
+GET http://localhost:8000/products/abb0964c-06f2-4125-8279-efe8ccd20803
+Content-Type: application/json
+
+###
+PUT http://localhost:8000/products/abb0964c-06f2-4125-8279-efe8ccd20803
+Content-Type: application/json
+
+{
+    "name": "My Product Updated",
+    "price": 210
+}
